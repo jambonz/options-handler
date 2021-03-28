@@ -1,5 +1,5 @@
 {
-  "name": "options-handler",
+  "name": "sbc-options-handler",
   "version": "1.0.0",
   "description": "SBC options handler",
   "main": "app.js",
