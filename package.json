@@ -1,0 +1,29 @@
+{
+  "name": "options-handler",
+  "version": "1.0.0",
+  "description": "SBC options handler",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 node test/ | ./node_modules/.bin/tap-spec",
+    "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
+    "jslint": "eslint app.js lib"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@jambonz/realtimedb-helpers": "^0.4.1",
+    "debug": "^4.3.1",
+    "drachtio-srf": "^4.4.48",
+    "pino": "^6.11.2"
+  },
+  "devDependencies": {
+    "async": "^1.5.2",
+    "clear-module": "^4.1.1",
+    "eslint": "^7.23.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "nyc": "^15.1.0",
+    "tap-spec": "^5.0.0",
+    "tape": "^5.2.2"
+  }
+}

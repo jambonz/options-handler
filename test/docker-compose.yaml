@@ -1,0 +1,33 @@
+version: '3.9'
+networks:
+  drachtio:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.32.0.0/16
+
+services:
+
+  drachtio:
+    image: drachtio/drachtio-server:latest
+    container_name: drachtio.org
+    restart: always
+    command: drachtio --contact "sip:*;transport=udp,tcp" --address 0.0.0.0 --port 9022
+    ports:
+      - "9060:9022/tcp"
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.50
+
+
+
+  uas:
+    image: drachtio/sipp:latest
+    command: sipp -sf /tmp/uas.xml
+    volumes:
+      - ./scenarios:/tmp
+    tty: true
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.60
+
