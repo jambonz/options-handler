@@ -9,8 +9,10 @@ const {createSet} = require('@jambonz/realtimedb-helpers')({
   host: process.env.JAMBONES_REDIS_HOST || 'localhost',
   port: process.env.JAMBONES_REDIS_PORT || 6379
 }, logger);
+const StatsCollector = require('@jambonz/stats-collector');
+const stats = new StatsCollector(logger);
 
-srf.locals = {...srf.locals, createSet};
+srf.locals = {...srf.locals, stats, createSet};
 srf.connect({
   host: process.env.DRACHTIO_HOST || '127.0.0.1',
   port: process.env.DRACHTIO_PORT || 9022,
