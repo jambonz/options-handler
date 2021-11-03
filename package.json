@@ -1,6 +1,6 @@
 {
   "name": "sbc-options-handler",
-  "version": "0.6.7-rc3",
+  "version": "0.6.7-rc5",
   "description": "SBC options handler",
   "main": "app.js",
   "scripts": {
