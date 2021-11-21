@@ -15,7 +15,7 @@
     "@jambonz/realtimedb-helpers": "^0.4.8",
     "@jambonz/stats-collector": "^0.1.5",
     "debug": "^4.3.1",
-    "drachtio-srf": "^4.4.48",
+    "drachtio-srf": "^4.4.57",
     "pino": "^6.11.2"
   },
   "devDependencies": {
