@@ -14,6 +14,13 @@ function connect(connectable) {
   });
 }
 
+function waitFor(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms * 1000);
+  });
+}
+
+
 test('sip tests', async(t) => {
   clearModule.all();
   const {srf, disconnect} = require('../app');
@@ -39,7 +46,7 @@ test('sip tests', async(t) => {
 
     await sippUac('uac-add-rtp-2.xml', '172.32.0.11');
     t.pass('added a second RTP server');
-
+    
     await sippUac('uac-remove-fs-1.xml', '172.32.0.10');
     t.pass('remove feature server 1');
 
@@ -54,6 +61,14 @@ test('sip tests', async(t) => {
 
     await sippUac('uac-external-options-ping.xml', '172.32.1.10');
     t.pass('handled external options ping');
+
+    await sippUac('uac-add-fs-1.xml', '172.32.0.10');
+    t.pass('added a feature server');
+
+    await waitFor(16);
+
+    await sippUac('uac-add-fs-1.xml', '172.32.0.10');
+    t.pass('feature server expired due to lack of check-in');
 
     t.end();
   } catch (err) {

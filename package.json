@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 JAMBONES_REDIS_PORT=16379 JAMBONES_NETWORK_CIDR=172.32.0.0/24 node test/ ",
+    "test": "NODE_ENV=test LOGLEVEL=error CHECK_EXPIRES_INTERVAL=5000 EXPIRES_INTERVAL=15000 DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 JAMBONES_REDIS_PORT=16379 JAMBONES_NETWORK_CIDR=172.32.0.0/24 node test/ ",
     "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
     "jslint": "eslint app.js lib"
   },
