@@ -1,22 +1,23 @@
 {
   "name": "sbc-options-handler",
-  "version": "v0.7.0",
+  "version": "v0.7.1",
   "description": "SBC options handler",
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 node test/ | ./node_modules/.bin/tap-spec",
-    "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
+    "test": "NODE_ENV=test LOGLEVEL=error CHECK_EXPIRES_INTERVAL=5000 EXPIRES_INTERVAL=15000 DRACHTIO_PORT=9060 JAMBONES_REDIS_PORT=16379 JAMBONES_NETWORK_CIDR=172.32.0.0/24 node test/ ",
+    "coverage": "NODE_ENV=test LOGLEVEL=error CHECK_EXPIRES_INTERVAL=5000 EXPIRES_INTERVAL=15000 DRACHTIO_PORT=9060 JAMBONES_REDIS_PORT=16379 JAMBONES_NETWORK_CIDR=172.32.0.0/24 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
     "jslint": "eslint app.js lib"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@jambonz/realtimedb-helpers": "^0.4.8",
-    "@jambonz/stats-collector": "^0.1.5",
-    "debug": "^4.3.1",
-    "drachtio-srf": "^4.4.57",
-    "pino": "^6.11.2"
+    "@jambonz/realtimedb-helpers": "^0.4.12",
+    "@jambonz/stats-collector": "^0.1.6",
+    "cidr-matcher": "^2.1.1",
+    "debug": "^4.3.2",
+    "drachtio-srf": "^4.4.60",
+    "pino": "^6.13.3"
   },
   "devDependencies": {
     "async": "^1.5.2",
@@ -24,7 +25,6 @@
     "eslint": "^7.23.0",
     "eslint-plugin-promise": "^4.3.1",
     "nyc": "^15.1.0",
-    "tap-spec": "^5.0.0",
     "tape": "^5.2.2"
   }
 }
