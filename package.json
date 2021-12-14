@@ -5,17 +5,18 @@
   "main": "app.js",
   "scripts": {
     "start": "node app",
-    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 node test/ | ./node_modules/.bin/tap-spec",
+    "test": "NODE_ENV=test LOGLEVEL=error DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 JAMBONES_REDIS_PORT=16379 JAMBONES_NETWORK_CIDR=172.32.0.0/24 node test/ ",
     "coverage": "NODE_ENV=test DRACHTIO_PORT=9060 FREESWITCH_PORT=8022 REDIS_PORT=16379 ./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
     "jslint": "eslint app.js lib"
   },
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@jambonz/realtimedb-helpers": "^0.4.8",
-    "@jambonz/stats-collector": "^0.1.5",
+    "@jambonz/realtimedb-helpers": "^0.4.12",
+    "@jambonz/stats-collector": "^0.1.6",
+    "cidr-matcher": "^2.1.1",
     "debug": "^4.3.1",
-    "drachtio-srf": "^4.4.57",
+    "drachtio-srf": "^4.4.60",
     "pino": "^6.11.2"
   },
   "devDependencies": {
@@ -24,7 +25,6 @@
     "eslint": "^7.23.0",
     "eslint-plugin-promise": "^4.3.1",
     "nyc": "^15.1.0",
-    "tap-spec": "^5.0.0",
     "tape": "^5.2.2"
   }
 }

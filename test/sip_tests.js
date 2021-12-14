@@ -24,8 +24,37 @@ test('sip tests', async(t) => {
 
   try {
     await connect(srf);
-    await sippUac('uac-options-expect-200.xml', '172.32.0.10');
-    t.pass('options test passes');
+
+    await sippUac('uac-add-fs-1.xml', '172.32.0.10');
+    t.pass('added a feature server');
+
+    await sippUac('uac-add-rtp-1.xml', '172.32.0.10');
+    t.pass('added an RTP server');
+
+    await sippUac('uac-add-fs-2.xml', '172.32.0.11');
+    t.pass('added a second feature server');
+
+    await sippUac('uac-add-fs-2.xml', '172.32.0.11');
+    t.pass('second feature server checks in again');
+
+    await sippUac('uac-add-rtp-2.xml', '172.32.0.11');
+    t.pass('added a second RTP server');
+
+    await sippUac('uac-remove-fs-1.xml', '172.32.0.10');
+    t.pass('remove feature server 1');
+
+    await sippUac('uac-remove-rtp-1.xml', '172.32.0.10');
+    t.pass('remove rtp server 1');
+
+    await sippUac('uac-remove-fs-2.xml', '172.32.0.11');
+    t.pass('removed second feature server');
+
+    await sippUac('uac-remove-rtp-2.xml', '172.32.0.11');
+    t.pass('removed second rtp server');
+
+    await sippUac('uac-external-options-ping.xml', '172.32.1.10');
+    t.pass('handled external options ping');
+
     t.end();
   } catch (err) {
     console.log(`error received: ${err}`);

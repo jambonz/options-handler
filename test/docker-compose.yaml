@@ -7,7 +7,6 @@ networks:
         - subnet: 172.32.0.0/16
 
 services:
-
   drachtio:
     image: drachtio/drachtio-server:latest
     container_name: drachtio.org
@@ -19,7 +18,13 @@ services:
       drachtio:
         ipv4_address: 172.32.0.50
 
-
+  redis:
+    image: redis:5-alpine
+    ports:
+      - "16379:6379/tcp"
+    networks:
+      drachtio:
+        ipv4_address: 172.32.0.51
 
   uas:
     image: drachtio/sipp:latest

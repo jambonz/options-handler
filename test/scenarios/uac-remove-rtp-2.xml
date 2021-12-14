@@ -25,20 +25,26 @@
   <send retrans="500">
     <![CDATA[
 
-      INFO sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      OPTIONS sip:[service]@[remote_ip]:[remote_port] SIP/2.0
       Via: SIP/2.0/[transport] [local_ip]:[local_port];branch=[branch]
       From: sipp <sip:sipp@[local_ip]:[local_port]>;tag=[pid]SIPpTag00[call_number]
       To: [service] <sip:[service]@[remote_ip]:[remote_port]>
       Call-ID: [call_id]
-      CSeq: 1 INFO
+      CSeq: 1 OPTIONS
       Max-Forwards: 70
       Subject: Performance Test
+      X-RTP-Status: closed
+      X-RTP-Calls: 0
       Content-Length: 0
 
     ]]>
   </send>
 
-  <recv response="480" rtd="true"/>
+  <recv response="200" rtd="true">
+    <action>
+      <ereg regexp="0" search_in="hdr" header="X-Members:" check_it="true" assign_to="1"/>
+      <log message="[$1]"/>
+    </action>
+  </recv>
 
 </scenario>
-

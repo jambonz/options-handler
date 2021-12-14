@@ -33,12 +33,18 @@
       CSeq: 1 OPTIONS
       Max-Forwards: 70
       Subject: Performance Test
+      X-RTP-Status: closed
+      X-RTP-Calls: 0
       Content-Length: 0
 
     ]]>
   </send>
 
-  <recv response="200" rtd="true"/>
+  <recv response="200" rtd="true">
+    <action>
+      <ereg regexp="1" search_in="hdr" header="X-Members:" check_it="true" assign_to="1"/>
+      <log message="[$1]"/>
+    </action>
+  </recv>
 
 </scenario>
-
