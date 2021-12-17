@@ -15,15 +15,22 @@ const StatsCollector = require('@jambonz/stats-collector');
 const stats = new StatsCollector(logger);
 
 srf.locals = {...srf.locals, stats, addToSet, removeFromSet, isMemberOfSet, retrieveSet};
-srf.connect({
-  host: process.env.DRACHTIO_HOST || '127.0.0.1',
-  port: process.env.DRACHTIO_PORT || 9022,
-  secret: process.env.DRACHTIO_SECRET || 'cymru'
-});
-srf.on('connect', async(err, hp) => {
-  if (err) return logger.error({err}, 'Error connecting to drachtio');
-  logger.info(`connected to drachtio listening on ${hp}`);
-});
+
+if (process.env.DRACHTIO_HOST && !process.env.K8S) {
+  srf.connect({
+    host: process.env.DRACHTIO_HOST || '127.0.0.1',
+    port: process.env.DRACHTIO_PORT || 9022,
+    secret: process.env.DRACHTIO_SECRET || 'cymru'
+  });
+  srf.on('connect', async(err, hp) => {
+    if (err) return logger.error({err}, 'Error connecting to drachtio');
+    logger.info(`connected to drachtio listening on ${hp}`);
+  });
+}
+else {
+  logger.info(`listening in outbound mode on port ${process.env.DRACHTIO_PORT}`);
+  srf.listen({port: process.env.DRACHTIO_PORT, secret: process.env.DRACHTIO_SECRET});
+}
 
 srf.options([initLocals], require('./lib/options')({srf, logger}));
 
