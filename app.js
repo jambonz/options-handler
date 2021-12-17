@@ -16,7 +16,7 @@ const stats = new StatsCollector(logger);
 
 srf.locals = {...srf.locals, stats, addToSet, removeFromSet, isMemberOfSet, retrieveSet};
 
-if (process.env.DRACHTIO_HOST && !process.env.K8S) {
+if (process.env.DRACHTIO_HOST) {
   srf.connect({
     host: process.env.DRACHTIO_HOST || '127.0.0.1',
     port: process.env.DRACHTIO_PORT || 9022,
