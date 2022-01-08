@@ -1,5 +1,3 @@
-const assert = require('assert');
-assert.ok(process.env.JAMBONES_NETWORK_CIDR, 'missing JAMBONES_NETWORK_CIDR env var');
 const Srf = require('drachtio-srf');
 const srf = new Srf();
 const opts = Object.assign({
