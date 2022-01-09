@@ -1,5 +1,4 @@
 const assert = require('assert');
-assert.ok(process.env.JAMBONES_NETWORK_CIDR, 'missing JAMBONES_NETWORK_CIDR env var');
 const Srf = require('drachtio-srf');
 const srf = new Srf();
 const opts = Object.assign({
@@ -25,6 +24,28 @@ if (process.env.DRACHTIO_HOST) {
   srf.on('connect', async(err, hp) => {
     if (err) return logger.error({err}, 'Error connecting to drachtio');
     logger.info(`connected to drachtio listening on ${hp}`);
+
+    if (process.env.K8S) {
+      assert(process.env.JAMBONES_MYSQL_HOST);
+      assert(process.env.JAMBONES_MYSQL_USER);
+      assert(process.env.JAMBONES_MYSQL_PASSWORD);
+      assert(process.env.JAMBONES_MYSQL_DATABASE);
+      const { addSbcAddress } = require('@jambonz/db-helpers')({
+        host: process.env.JAMBONES_MYSQL_HOST,
+        user: process.env.JAMBONES_MYSQL_USER,
+        password: process.env.JAMBONES_MYSQL_PASSWORD,
+        database: process.env.JAMBONES_MYSQL_DATABASE,
+        connectionLimit: process.env.JAMBONES_MYSQL_CONNECTION_LIMIT || 10
+      }, logger);
+      const hostports = hp.split(',');
+      for (const hp of hostports) {
+        const arr = /^(.*)\/(.*):(\d+)$/.exec(hp);
+        if (arr && 'udp' === arr[1]) {
+          logger.info(`adding sbc public address to database: ${arr[2]}`);
+          addSbcAddress(arr[2]);
+        }
+      }
+    }
   });
 }
 else {
