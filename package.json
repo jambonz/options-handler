@@ -13,7 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "@jambonz/db-helpers": "^0.6.18",
-    "@jambonz/realtimedb-helpers": "^0.4.28",
+    "@jambonz/realtimedb-helpers": "^0.4.29",
     "@jambonz/stats-collector": "^0.1.6",
     "debug": "^4.3.4",
     "drachtio-srf": "^4.5.0",
