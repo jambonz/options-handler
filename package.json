@@ -12,14 +12,12 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@jambonz/db-helpers": "^0.6.16",
-    "@jambonz/realtimedb-helpers": "^0.4.24",
+    "@jambonz/db-helpers": "^0.6.18",
+    "@jambonz/realtimedb-helpers": "^0.4.28",
     "@jambonz/stats-collector": "^0.1.6",
-    "cidr-matcher": "^2.1.1",
-    "debug": "^4.3.2",
-    "drachtio-srf": "^4.4.60",
-    "husky": "^7.0.4",
-    "pino": "^6.13.3"
+    "debug": "^4.3.4",
+    "drachtio-srf": "^4.5.0",
+    "pino": "^6.14.0"
   },
   "devDependencies": {
     "async": "^1.5.2",
@@ -27,6 +25,6 @@
     "eslint": "^7.23.0",
     "eslint-plugin-promise": "^4.3.1",
     "nyc": "^15.1.0",
-    "tape": "^5.2.2"
+    "tape": "^5.5.3"
   }
 }
